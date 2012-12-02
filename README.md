@@ -1,4 +1,4 @@
 intellij-inspections
 ====================
 
-Some useful inspections for IntelliJ
+Some useful inspections for IntelliJ.

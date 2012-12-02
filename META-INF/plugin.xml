@@ -1,0 +1,42 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin version="2">
+  <name>Nullable/Nonnull Support</name>
+  <description>An inspection which flags parameters of non-private methods which do not have an @Nullable or @Nonnull annotation.</description>
+  <version>1.2</version>
+  <vendor url="https://github.com/rfalke/intellij-inspections" email="i-idea-annotation@rf.risimo.net" logo="/MissingNullableNonnullAnnotation.png">Raimar Falke</vendor>
+    <change-notes>
+<![CDATA[
+        <h3>Changes in 1.2 (2012-12-02)</h3>
+        <ul>
+            <li>[bugfix] varargs parameter are non-null by default and need no annotation
+        </ul>
+        <h3>Changes in 1.1 (2012-11-28)</h3>
+        <ul>
+            <li>[change] check all non-private methods
+            <li>[change] set default inspection level to warning
+            <li>[bugfix] also check annotation in super methods
+        </ul>
+]]>
+    </change-notes>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="107.105"/>
+
+  <application-components>
+      <component>
+          <implementation-class>net.risimo.nullannotationinspection.InspectionComponent</implementation-class>
+      </component>
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+</idea-plugin>
