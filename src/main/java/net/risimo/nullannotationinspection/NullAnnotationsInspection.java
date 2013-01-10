@@ -66,12 +66,14 @@ public class NullAnnotationsInspection extends BaseLocalInspectionTool {
                 if (parameterNeedsAnnotation(parameter)) {
                     if (!hasAnnotation(parameter) && !superMethodHasAnnotation(i, superMethodSignatures)) {
                         final LocalQuickFix[] localQuickFixes = {new AddNullableAnnotationFix(parameter), new AddNotNullAnnotationFix(parameter)};
-                        final ProblemDescriptor problemDescriptor = manager.createProblemDescriptor(
-                                parameter,
-                                "Missing @Nullable/@Nonnull annotation",
-                                localQuickFixes,
-                                ProblemHighlightType.GENERIC_ERROR_OR_WARNING, true, false);
-                        problemDescriptors.add(problemDescriptor);
+                        if (parameter.isPhysical()) {
+                            final ProblemDescriptor problemDescriptor = manager.createProblemDescriptor(
+                                    parameter,
+                                    "Missing @Nullable/@Nonnull annotation",
+                                    localQuickFixes,
+                                    ProblemHighlightType.GENERIC_ERROR_OR_WARNING, true, false);
+                            problemDescriptors.add(problemDescriptor);
+                        }
                     }
                 }
             }
@@ -81,12 +83,14 @@ public class NullAnnotationsInspection extends BaseLocalInspectionTool {
                 if (returnTypeElement == null) {
                     throw new RuntimeException("Bad method " + method);
                 }
-                final ProblemDescriptor problemDescriptor = manager.createProblemDescriptor(
-                        returnTypeElement,
-                        "Missing @Nullable/@Nonnull annotation",
-                        localQuickFixes,
-                        ProblemHighlightType.GENERIC_ERROR_OR_WARNING, true, false);
-                problemDescriptors.add(problemDescriptor);
+                if (returnTypeElement.isPhysical()) {
+                    final ProblemDescriptor problemDescriptor = manager.createProblemDescriptor(
+                            returnTypeElement,
+                            "Missing @Nullable/@Nonnull annotation",
+                            localQuickFixes,
+                            ProblemHighlightType.GENERIC_ERROR_OR_WARNING, true, false);
+                    problemDescriptors.add(problemDescriptor);
+                }
             }
         }
 
